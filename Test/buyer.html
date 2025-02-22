@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Page - Vintage Vault</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="wishlist.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f5f0;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #8b5e3ca4;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+            background-image: url('images/IMG-20250220-WA0027.jpg');
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .products {
+            width: 80%;
+            margin: 50px auto;
+            text-align: center;
+        }
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .product {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .product:hover {
+            transform: translateY(-5px);
+        }
+        .product img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .wishlist-btn {
+            display: block;
+            background-color: #8B5E3C;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .wishlist-btn.selected {
+            background: #28a745;
+        }
+        .wishlist-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .wishlist-container h3 {
+            text-align: center;
+        }
+        .buy-now {
+            width: 100%;
+            background: #f1931f;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #8b5e3ca4;
+            color: white;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Vintage Vault</h1>
+        <button class="wishlist-button" onclick="toggleWishlist()">View Wishlist</button>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="wishlist.html">Wishlist</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="wishlist-container" id="wishlist-container">
+        <h2>My Wishlist</h2>
+        <ul id="wishlist-items"></ul>
+        <button onclick="toggleWishlist()">Close</button>
+    </section>
+    
+    <section class="products">
+        <h2>Shop Vintage Items</h2>
+        <div class="product-list" id="product-list"></div>
+    </section>
+
+    <script>
+        let wishlist = {};
+
+        function loadProducts() {
+            $.ajax({
+                url: 'fetch_products.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function (products) {
+                    if (products.length > 0) {
+                        products.forEach(product => {
+                            $('#product-list').append(`
+                                <div class="product" data-id="${product.id}">
+                                    <img src="${product.image_path}" width="250" height="250" alt="${product.product_name}">
+                                    <h3>${product.product_name}</h3>
+                                    <p>Price: $${parseFloat(product.price).toFixed(2)}</p>
+                                    <button class="wishlist-btn" onclick="addToWishlist(${product.id}, '${product.product_name}', ${product.price}, this)">Add to Wishlist</button>
+                                </div>
+                            `);
+                        });
+                    } else {
+                        $('#product-list').html("<p>No products available.</p>");
+                    }
+                },
+                error: function () {
+                    $('#product-list').html("<p>Error loading products.</p>");
+                }
+            });
+        }
+
+        function addToWishlist(id, name, price, button) {
+            if (!wishlist[id]) {
+                wishlist[id] = { name, price };
+                button.classList.add('selected');
+                button.innerText = "Added";
+            } else {
+                delete wishlist[id];
+                button.classList.remove('selected');
+                button.innerText = "Add to Wishlist";
+            }
+            updateWishlist();
+        }
+
+        function updateWishlist() {
+            const wishlistContainer = document.getElementById("wishlist-items");
+            wishlistContainer.innerHTML = "";
+            Object.keys(wishlist).forEach(id => {
+                let item = document.createElement("li");
+                item.innerHTML = `${wishlist[id].name} - $${wishlist[id].price} 
+                    <button onclick="removeFromWishlist(${id})">❌</button>`;
+                wishlistContainer.appendChild(item);
+            });
+        }
+
+        function removeFromWishlist(id) {
+            delete wishlist[id];
+            updateWishlist();
+        }
+
+        function toggleWishlist() {
+            const wishlistContainer = document.getElementById("wishlist-container");
+            wishlistContainer.style.display = wishlistContainer.style.display === "block" ? "none" : "block";
+        }
+
+        $(document).ready(function () {
+            loadProducts();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Vintage Vault</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f5f0;
+            color: #333;
+        }
+        header {
+            background-color: #8b5e3ca4;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+        .hero {
+            background-image: url('images/IMG-20250220-WA0028.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: rgb(179, 20, 20);
+            flex-direction: column;
+            padding: 20px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .hero p {
+            font-size: 1.5rem;
+        }
+        .btn {
+            background-color: #05c950;
+            color: #8B5E3C;
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #FFC107;
+        }
+        .features {
+            text-align: center;
+            padding: 60px;
+            background-color: white;
+        }
+        .feature-item {
+            display: inline-block;
+            width: 30%;
+            padding: 30px;
+            margin: 15px;
+            background: #f1e4d9;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .feature-item:hover {
+            transform: translateY(-10px);
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #8b5e3ca4;
+            color: white;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Vintage Vault</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="buyer.html">Shop</a></li>
+                <li><a href="seller.html">Sell</a></li>
+                <li><a href="index.html">Sign In</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+                <li><a href="logout.php">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h1>Welcome to Vintage Vault</h1>
+        <p>Your one-stop marketplace for second-hand treasures</p>
+        <a href="buyer.html" class="btn">Start Shopping</a>
+        <a href="Seller.html" class="btn">Start selling</a>
+    </section>
+    
+    <section class="features">
+        <h2>Why Choose Vintage Vault?</h2>
+        <div class="feature-item">
+            <h3>Quality Products</h3>
+            <p>Every item is inspected for quality and authenticity.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Affordable Prices</h3>
+            <p>Find the best deals on second-hand goods.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Easy Selling</h3>
+            <p>List your items effortlessly and reach a wide audience.</p>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Vintage Vault. All rights reserved.</p>
+    </footer>
+</body>
+</html>

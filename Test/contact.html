@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Vintage Vault</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3ede7;
+            color: #333;
+        }
+        header {
+            background-color: #5a3826;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background-image: url('images/IMG-20250220-WA0031.jpg');
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+            margin: 20px 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+        .contact-container {
+            max-width: 800px;
+            margin: 120px auto 50px;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        .contact-container h2 {
+            color: #5a3826;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .contact-container p {
+            line-height: 1.8;
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .contact-form button {
+            background-color: #5a3826;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .contact-form button:hover {
+            background-color: #3e271a;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #5a3826;
+            color: white;
+            font-size: 16px;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+            background-image: url('images/IMG-20250220-WA0031.jpg');
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Vintage Vault</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="buyer.html">Shop</a></li>
+                <li><a href="seller.html">Sell</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="contact-container">
+        <h2>Contact Us</h2>
+        <p>Have questions? Reach out to us and we’ll get back to you as soon as possible.</p>
+        <p>📧 Email: support@marketplace.com</p>
+        <p>📞 Phone: +123 456 7890</p>
+        <p>📍 Address: 123 Marketplace Street, City, Country</p>
+        <form class="contact-form" action="contact.php" method="POST">
+            <input type="text" name="name" id="name" placeholder="Your Name" required>
+            <input type="email" name="email" id="email" placeholder="Your Email" required>
+            <textarea name="message" id="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form> 
+         
+
+    </section>
+    <script>
+        function validateForm() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let message = document.getElementById("message").value;
+            
+            if (name === "" || email === "" || message === "") {
+                alert("Please fill out all fields.");
+                return false;
+            }
+
+            alert("Message sent successfully!");
+            return true;
+        }
+    </script>
+    
+    <footer>
+        <p>&copy; 2025 Vintage Vault. All rights reserved.</p>
+    </footer>
+</body>
+</html>
